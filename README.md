@@ -7,8 +7,15 @@
 ```
 # Your watcher
 var fcache = require('fcache');
-fcache.update(path);
+watcher.on('change', function(path) {
+  fcache.updateCache(path, function(error, data) {
+    // Do some stuff
+  });
+});
 
-# Your plugin
-fcache.read(path)
+# Later, in your plugin
+fcache.readFile(path, function(error, data) {
+  // Would use cached version.
+});
+
 ```

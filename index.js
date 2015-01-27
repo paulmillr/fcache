@@ -5,7 +5,7 @@ var key = '_fcache_' + ver;
 var cache = global[key] || Object.create(null);
 global[key] = cache;
 
-exports.read = function(path, callback) {
+exports.readFile = function(path, callback) {
   if (path in cache) {
     callback(undefined, cache[path]);
   } else {
@@ -13,7 +13,7 @@ exports.read = function(path, callback) {
   }
 };
 
-exports.update = function(path, callback) {
+exports.updateCache = function(path, callback) {
   if (!callback) callback = Function.prototype;
   fs.readFile(path, 'utf-8', function(error, source) {
     if (error) return callback(error);
