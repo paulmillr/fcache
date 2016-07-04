@@ -1,10 +1,10 @@
 # fcache
 
-> `fs.readFile` cache for Node.js build systems & watchers
+Standartized `fs.readfile` caching mechanism for incremental build systems.
 
 ## Usage
 
-```js
+```javascript
 // Your watcher
 const fcache = require('fcache');
 watcher.on('change', path => {
@@ -24,5 +24,5 @@ fcache.readFile(path).then(data => {
 
 fcache | Node.js
 ------ | -------
-^0.1   | > 0.8
-^1.0   | > 4.0
+~0.1   | > 0.8
+~0.2   | > 4.0
