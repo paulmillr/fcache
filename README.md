@@ -1,6 +1,6 @@
 # fcache
 
-> `fs.readFile` cache for node.js build systems & watchers
+> `fs.readFile` cache for Node.js build systems & watchers
 
 ## Usage
 
@@ -19,3 +19,10 @@ fcache.readFile(path).then(data => {
 });
 
 ```
+
+## Supported Node.js versions
+
+fcache | Node.js
+------ | -------
+^0.1   | > 0.8
+^1.0   | > 4.0
