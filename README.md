@@ -4,17 +4,17 @@
 
 ## Usage
 
-```
-# Your watcher
-var fcache = require('fcache');
-watcher.on('change', function(path) {
-  fcache.updateCache(path, function(error, data) {
-    // Do some stuff
+```js
+// Your watcher
+const fcache = require('fcache');
+watcher.on('change', path => {
+  fcache.updateCache(path).then(data => {
+    // Do some stuff.
   });
 });
 
-# Later, in your plugin
-fcache.readFile(path, function(error, data) {
+// Later, in your plugin
+fcache.readFile(path).then(data => {
   // Would use cached version.
 });
 
