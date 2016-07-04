@@ -1,24 +1,32 @@
-var fs = require('fs');
-var ver = require('./package.json').version.split('.').slice(0, 2).join('.');
-var key = '_fcache_' + ver;
+'use strict';
 
-var cache = global[key] || Object.create(null);
-global[key] = cache;
+const fs = require('fs');
+const toAbsolute = require('path').resolve;
 
-exports.readFile = function(path, callback) {
-  if (path in cache) {
-    callback(undefined, cache[path]);
-  } else {
-    fs.readFile(path, 'utf-8', callback);
+const symbol = Symbol.for('fcache');
+const cache = global[symbol] || new Map();
+global[symbol] = cache;
+
+exports.readFile = path => new Promise((resolve, reject) => {
+  const absPath = toAbsolute(path);
+  if (cache.has(absPath)) {
+    resolve(cache.get(absPath));
+    return;
   }
-};
-
-exports.updateCache = function(path, callback) {
-  if (!callback) callback = Function.prototype;
-  fs.readFile(path, 'utf-8', function(error, source) {
-    if (error) return callback(error);
-    cache[path] = source;
-    callback(undefined, source)
+  fs.readFile(absPath, 'utf-8', (error, data) => {
+    if (error) reject(error);
+    else resolve(data);
   });
-};
+});
 
+exports.updateCache = path => new Promise((resolve, reject) => {
+  const absPath = toAbsolute(path);
+  fs.readFile(absPath, 'utf-8', (error, data) => {
+    if (error) {
+      reject(error);
+      return;
+    }
+    cache.set(absPath, data);
+    resolve(data);
+  });
+});

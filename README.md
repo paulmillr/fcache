@@ -1,21 +1,28 @@
 # fcache
 
-> `fs.readFile` cache for node.js build systems & watchers
+> `fs.readFile` cache for Node.js build systems & watchers
 
 ## Usage
 
-```
-# Your watcher
-var fcache = require('fcache');
-watcher.on('change', function(path) {
-  fcache.updateCache(path, function(error, data) {
-    // Do some stuff
+```js
+// Your watcher
+const fcache = require('fcache');
+watcher.on('change', path => {
+  fcache.updateCache(path).then(data => {
+    // Do some stuff.
   });
 });
 
-# Later, in your plugin
-fcache.readFile(path, function(error, data) {
+// Later, in your plugin
+fcache.readFile(path).then(data => {
   // Would use cached version.
 });
 
 ```
+
+## Supported Node.js versions
+
+fcache | Node.js
+------ | -------
+^0.1   | > 0.8
+^1.0   | > 4.0
