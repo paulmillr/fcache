@@ -26,3 +26,7 @@ fcache | Node.js
 ------ | -------
 ~0.1   | > 0.8
 ~0.2   | > 4.0
+
+## License
+
+[The MIT License](https://github.com/paulmillr/mit) (c) 2016 Paul Miller (http://paulmillr.com)
