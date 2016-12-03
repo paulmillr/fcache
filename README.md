@@ -1,6 +1,6 @@
 # fcache
 
-Standartized `fs.readfile` caching mechanism for incremental build systems.
+Standardized `fs.readfile` caching mechanism for incremental build systems.
 
 ## Usage
 
@@ -25,7 +25,7 @@ fcache.readFile(path).then(data => {
 fcache | Node.js
 ------ | -------
 ~0.1   | > 0.8
-~0.2   | > 4.0
+^0.2   | > 4.0
 
 ## License
 
